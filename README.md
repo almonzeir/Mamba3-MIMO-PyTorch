@@ -1,69 +1,43 @@
-# Mamba-3 MIMO: community PyTorch Implementation 🐍🚀
+# 🛰️ Autonomous Agent Agency (3-Tier Architecture)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![ArXiv](https://img.shields.io/badge/ArXiv-2603.15569-red.svg)](https://arxiv.org/abs/2603.15569)
+This repository provides the blueprints for a 24/7 Autonomous Intelligence Agency running locally, bridging the gap between raw research and mobile execution.
 
-A precision-engineered PyTorch reproduction of the **Mamba-3** architecture, as introduced in *Lahoti et al.: "Mamba-3: Improved Sequence Modeling using State Space Principles"* (March 2026).
+## 🏗️ The Architecture
+1. **The Brain:** Gemini CLI + Gemma 4 (31B) / Mistral 7B via OpenRouter.
+2. **The Hands:** MCP (Model Context Protocol) for live web browsing and GitHub management.
+3. **The Bridge:** Gmail (Command Input) + WhatsApp (Briefing Output via TextMeBot).
 
-## 🌟 Key Innovations Implemented
+## 🚀 Core Automated Workflows
 
-This repository provides a clean-room implementation of the two primary breakthroughs of Mamba-3:
+### 1. Daily AI Intelligence Briefing
+Scans the ArXiv API (`cat:cs.AI`) every morning, fetches the latest 5 papers, and uses Gemma 4 to perform an architectural autopsy.
+- **Output:** A WhatsApp briefing covering: Architecture, X-Factor, and Strategic Value.
 
-### 1. Exponential-Trapezoidal Discretization
-Unlike previous SSMs using simple Euler or Zero-Order Hold (ZOH), Mamba-3 introduces a stabilizing trapezoidal discretization:
-$$ \bar{A} = (I + \frac{\Delta A}{2})(I - \frac{\Delta A}{2})^{-1} $$
-This implementation ensures superior numerical stability and gradient flow over long sequences compared to standard discretization methods.
+### 2. WhatsApp Remote Control
+A "Command-Line-via-Email" system.
+- **Input:** Email with subject `CMD: [Your Task]`.
+- **Logic:** Agent processes the task using live web search (MCP).
+- **Output:** Final report delivered to WhatsApp.
 
-### 2. MIMO (Multi-Input, Multi-Output) Formulation
-A fundamental redesign of the state update mechanism to maximize GPU utilization. By reframing the selective scan as a MIMO operation, the architecture bridges the gap between the efficiency of SSMs and the hardware-friendliness of Transformers.
+## 🛠️ Technical Setup
 
-## 🚀 Quick Start
+### Prerequisites
+- **Python 3.10+**
+- **Gemini CLI** (configured with MCP)
+- **OpenRouter API Key** (for Gemma 4 access)
+- **TextMeBot API Key** (for WhatsApp bridge)
 
 ### Installation
-```bash
-pip install torch einops
-```
+1. **Clone the Agency:**
+   ```bash
+   git clone https://github.com/almonzeir/Autonomous-Agent-Agency.git
+   cd Autonomous-Agent-Agency
+   ```
+2. **Configure Environment:**
+   Create a `.env` file with your keys for Gmail (App Password), OpenRouter, and TextMeBot.
 
-### Usage
-```python
-import torch
-from mamba3_mimo import Mamba3MIMO
-
-# Initialize model (Hardware-aware configuration)
-model = Mamba3MIMO(
-    d_model=128,    # Model dimension
-    d_state=16,     # State dimension (N)
-    expand=2        # Expansion factor
-)
-
-# Input: (Batch, Length, Dimension)
-x = torch.randn(2, 64, 128)
-
-# Forward pass
-output = model(x)
-print(output.shape) # torch.Size([2, 64, 128])
-```
-
-## 🛠️ Architecture Details
-- **Selective Dynamics:** Input-dependent discretization parameters ($\Delta, B, C$).
-- **Complex-Valued State Simulation:** Enhanced memory recall through high-dimensional state tracking.
-- **Hardware-Aware Scaling:** Optimized for modern GPU memory hierarchies.
-
-## 📝 Roadmap
-- [ ] Implement custom CUDA kernels for the MIMO Selective Scan.
-- [ ] Add support for mixed-precision training.
-- [ ] Benchmarking against Mamba-2 and Transformers on the RULER benchmark.
-
-## 🤝 Citation
-If you use this implementation in your research, please cite the original Mamba-3 paper:
-```bibtex
-@article{lahoti2026mamba3,
-  title={Mamba-3: Improved Sequence Modeling using State Space Principles},
-  author={Lahoti et al.},
-  journal={arXiv preprint arXiv:2603.15569},
-  year={2026}
-}
-```
+3. **Schedule the Agency:**
+   Use Windows Task Scheduler (or `cron` on Linux) to run the `run_agency.bat` daily.
 
 ---
-*Developed autonomously by the Almonzer Hamid AI Agentic System.*
+*Developed and documented autonomously by the Almonzer Hamid AI Agentic System via Gemini CLI.*
