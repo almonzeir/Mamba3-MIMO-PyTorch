@@ -1,43 +1,32 @@
-# 🛰️ Autonomous Agent Agency (3-Tier Architecture)
+# Mamba-3 MIMO in PyTorch
 
-This repository provides the blueprints for a 24/7 Autonomous Intelligence Agency running locally, bridging the gap between raw research and mobile execution.
+An unofficial, pure-PyTorch implementation of the MIMO (multi-input, multi-output) block from **Mamba-3: Improved Sequence Modeling using State Space Principles** (Lahoti et al., [arXiv:2603.15569](https://arxiv.org/abs/2603.15569)).
 
-## 🏗️ The Architecture
-1. **The Brain:** Gemini CLI + Gemma 4 (31B) / Mistral 7B via OpenRouter.
-2. **The Hands:** MCP (Model Context Protocol) for live web browsing and GitHub management.
-3. **The Bridge:** Gmail (Command Input) + WhatsApp (Briefing Output via TextMeBot).
+It is written to be readable rather than fast: there are no custom CUDA kernels, so it is suited to studying the architecture and running small experiments.
 
-## 🚀 Core Automated Workflows
+## What is implemented
 
-### 1. Daily AI Intelligence Briefing
-Scans the ArXiv API (`cat:cs.AI`) every morning, fetches the latest 5 papers, and uses Gemma 4 to perform an architectural autopsy.
-- **Output:** A WhatsApp briefing covering: Architecture, X-Factor, and Strategic Value.
+- Exponential-trapezoidal discretisation of the state space dynamics
+- MIMO state updates
+- Complex-valued state tracking, simulated with a pair of real values
+- Depthwise causal convolution and gated input projection, as in earlier Mamba blocks
 
-### 2. WhatsApp Remote Control
-A "Command-Line-via-Email" system.
-- **Input:** Email with subject `CMD: [Your Task]`.
-- **Logic:** Agent processes the task using live web search (MCP).
-- **Output:** Final report delivered to WhatsApp.
+## Usage
 
-## 🛠️ Technical Setup
+```bash
+pip install -r requirements.txt
+python example_usage.py
+```
 
-### Prerequisites
-- **Python 3.10+**
-- **Gemini CLI** (configured with MCP)
-- **OpenRouter API Key** (for Gemma 4 access)
-- **TextMeBot API Key** (for WhatsApp bridge)
+```python
+import torch
+from mamba3_mimo import Mamba3MIMO
 
-### Installation
-1. **Clone the Agency:**
-   ```bash
-   git clone https://github.com/almonzeir/Autonomous-Agent-Agency.git
-   cd Autonomous-Agent-Agency
-   ```
-2. **Configure Environment:**
-   Create a `.env` file with your keys for Gmail (App Password), OpenRouter, and TextMeBot.
+model = Mamba3MIMO(d_model=128, d_state=16)
+x = torch.randn(1, 1024, 128)   # (batch, length, d_model)
+y = model(x)                    # same shape as x
+```
 
-3. **Schedule the Agency:**
-   Use Windows Task Scheduler (or `cron` on Linux) to run the `run_agency.bat` daily.
+## Notes
 
----
-*Developed and documented autonomously by the Almonzer Hamid AI Agentic System via Gemini CLI.*
+This is a community implementation and has not been validated against the authors' reported results. Corrections and comparisons with the official code are welcome.
